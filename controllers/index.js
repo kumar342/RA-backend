@@ -1,7 +1,10 @@
 const ReadyAssistUser = require("../model/model");
 
 const totalUsers = (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   ReadyAssistUser.find()
+    .limit(limit * 1)
+    .skip((page - 1) * limit)
     .then((Total) => {
       res.json(Total);
     })
